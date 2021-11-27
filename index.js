@@ -487,8 +487,7 @@ class Spinnies {
         currentSpinner.options.status = newStatus;
       }
     });
-    this.checkIfActiveSpinners();
-
+   
     return this.spinners;
   }
 
@@ -501,8 +500,7 @@ class Spinnies {
       clearInterval(this.currentInterval);
       this.currentInterval = this.loopStream();
       if (!this.isCursorHidden) cliCursor.hide();
-      this.isCursorHidden = true;
-      this.checkIfActiveSpinners();
+      this.isCursorHidden = true;     
     } else {
       if (!name) return;
       const spinner = this.get(name);
@@ -516,7 +514,8 @@ class Spinnies {
     const { frames, interval } = this.options.spinner;
     return setInterval(() => {
       this.setStreamOutput(frames[this.currentFrameIndex]);
-      this.currentFrameIndex = this.currentFrameIndex === frames.length - 1 ? 0 : ++this.currentFrameIndex
+      this.currentFrameIndex = this.currentFrameIndex === frames.length - 1 ? 0 : ++this.currentFrameIndex;
+      this.checkIfActiveSpinners();
     }, interval);
   }
 
